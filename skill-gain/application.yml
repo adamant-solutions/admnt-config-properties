@@ -1,0 +1,51 @@
+uploadLocationCV: ${user.home}/skillgain-cvs
+uploadLocationExtra: ${user.home}/skillgain-extra
+server:
+  port: 18082
+  servlet:
+    context-path: /api
+  ssl:
+    key-store: file:/home/ec2-user/skillgain/keystore.p12
+    key-store-password: Admin1234!
+    key-store-type: PKCS12
+spring:
+  servlet:
+    multipart:
+      enabled: true
+  application:
+    name: skillgainApi
+  datasource:
+    url: jdbc:postgresql://database-ztl-web.cv1u40hlsepl.eu-central-1.rds.amazonaws.com:5432/ztl?currentSchema=skillgain&charSet=UTF-8
+    username: ztl
+    password: ztlztlztl
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      jdbc:
+        batch_size: 15
+        fetch_size: 100
+
+logging:
+  level:
+    root: ERROR
+    org:
+      hibernate:
+        SQL: ERROR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: true
+  endpoint:
+    shutdown:
+      enabled: true
+    mappings:
+      enabled: true
+
